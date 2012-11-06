@@ -1,0 +1,3 @@
+[submodule "public/extjs"]
+	path = public/extjs
+	url = http://github.com/probonogeek/extjs.git
