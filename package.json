@@ -1,0 +1,18 @@
+{
+    "name" : "extjs4-form-taginput"
+    , "version": "0.0.1"
+    , "author": "Alexander Pirsig"
+    , "homepage": "http://github.com/piscis/extjs4-taginput"
+    , "description": "A Tag Input field for ExtJS 4"
+    , "bugs": {
+            "url": "https://github.com/piscis/extjs4-form-taginput/issues/"
+    }
+    , "repository":
+        { "type": "git"
+        , "url": "git://github.com/piscis/extjs4-form-taginput.git"
+    }
+    , "main": "./server.js"
+    , "dependencies": {
+        "node-static": ""
+    }
+}

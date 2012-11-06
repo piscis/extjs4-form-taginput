@@ -1,0 +1,218 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>ExtJs TagInput</title>
+        <link rel="stylesheet" type="text/css" media="screen, projection, print" src="extjs/resources/css/ext-all-debug.css">
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script type="text/javascript" src="extjs/ext-all-debug.js"></script>
+        <!--<script type="text/javascript" src="app/bootstrap.js"></script>-->
+        
+    </head>
+    <body>
+
+        <style type="text/css">
+
+            .tag-widget {
+
+                font: 13px/1.231 arial,helvetica,clean,sans-serif;
+
+                list-style-type: none;
+                list-style-image: none;
+                margin: 0;
+                padding: 0;
+                border: 1px solid #C6C6C6;
+                padding: 1px 5px;
+                display: block;
+            }
+
+            .tag-widget:after {
+                content: " ";
+                display:block;
+                clear: both;
+            }
+
+            .tag-widget .tag-item,
+            .tag-widget .tag-item-input {
+                display: inline-block;
+                position: relative;
+                margin: 0 1px 0 0;
+                padding: 0;
+            }
+
+            .tag-widget .tag-item {
+                margin: 2px 0px 2px 0px;
+                padding: 0.2em 18px 0.2em 0.5em;
+            }
+
+            .tag-widget .tag-item.tag-choice {
+                background-color: #BBCEF1;
+                border-color: #6D95E0;
+                -moz-border-radius: 6px;
+                border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border: 1px solid #CAD8F3;
+                background: none;
+                background-color: #DEE7F8;
+                color: #555;
+                margin-right: 2px;
+            }
+
+            .tag-widget .tag-item.tag-choice:hover {
+                background-color: #BBCEF1;
+                border-color: #6D95E0;
+            }
+
+            .tag-widget .tag-label {
+
+            }
+
+            .tag-widget .tag-icon {
+                font-weight: bold;
+            }
+
+            .tag-widget .tag-input {
+                border: 0;
+                outline: none;
+            }
+
+            .tag-widget .tag-close {
+                cursor: pointer;
+                position: absolute;
+                right: 0.4em;
+                margin-top: -9px;
+                top: 50%;
+            }
+
+        </style>
+
+        <ul class="tag-widget">
+            <li class="tag-item tag-choice">
+                <span class="tag-label">Valu 0</span>
+                <a class="tag-close">
+                    <span class="tag-icon">x</span>
+                </a>
+            </li>
+            <li class="tag-item tag-choice">
+                <span class="tag-label">Value 1</span>
+                <a class="tag-close">
+                    <span class="tag-icon">x</span>
+                </a>
+            </li>            
+            <li class="tag-item tag-choice">
+                <span class="tag-label">Value 2</span>
+                <a class="tag-close">
+                    <span class="tag-icon">x</span>
+                </a>
+            </li>
+            <li class="tag-item tag-choice">
+                <span class="tag-label">Value 3</span>
+                <a class="tag-close">
+                    <span class="tag-icon">x</span>
+                </a>
+            </li>
+            <li class="tag-item-input">
+                <input type="text" class="tag-input" value="" />
+            </li>
+        </ul>
+
+
+        <script type="text/javascript">
+
+            Ext.onReady(function(){
+
+                var el = Ext.select('input.tag-input').item(0);
+
+                var tagField = Ext.select('ul.tag-widget').item(0);
+
+                Ext.select('ul.tag-widget').on('click',function(e, target, options){
+
+                    var opts = {
+                        callback: function(){
+                            parent.remove();
+                        }
+                    };
+
+
+                    var parent = Ext.get(target).up('li.tag-item').fadeOut(opts);
+
+                },null,{
+                    delegate: 'a.tag-close'
+                });
+
+                tagField.on({
+                    click: function(e, target, options){
+                        el.focus();
+                    }
+                });
+
+
+                el.on({
+                    click: function(e,target,options){
+                        console.log(e,target,options);
+                    },
+                    keydown: function(e, target, options){
+
+                        // RETURN || TAB || SPACE 
+                        var keyCode = e.getKey();
+
+                        if(keyCode == 13 || keyCode == 9 || keyCode == 32){
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            _createTagValue(el.getValue())
+                            el.dom.value = '';
+                        }                        
+                    }
+                });
+
+                var _createTagValue = function(tagval){
+
+                    if(tagval!=''){
+
+                        if(!_tagExists(tagval)){
+
+                            var target = Ext.select('.tag-item-input').first();
+
+                            var html = '<li style="margin-right: 8px" class="tag-item tag-choice"><span class="tag-label">{tagvalue}</span><a class="tag-close"><span class="tag-icon">x</span></a></li>'
+
+                            var tpl = Ext.core.DomHelper.createTemplate(html);
+
+                            tpl.insertBefore(target,{tagvalue:tagval});
+
+                        }else{
+
+                            _highlightByTagValue(tagval);
+                        }
+                    }
+                }
+
+                var _tagExists = function(tagval) {
+
+                    var elements = _findSelectedElement(tagval);
+
+                    if(elements.elements.length>0){
+                        return true;
+                    }else{
+                        return false;
+                    }
+
+                }
+
+                var _highlightByTagValue = function(tagval) {
+
+                    var elements = _findSelectedElement(tagval);
+
+                    elements.each(function(item){ Ext.get(item).up('li').highlight(); });
+                }
+
+                var _findSelectedElement = function(tagval) {
+
+                    return Ext.select('li.tag-item span.tag-label:nodeValue('+tagval+')');
+                }
+
+            });
+        </script>
+
+    </body>
+</html>
