@@ -1,0 +1,76 @@
+.tag-widget {
+
+    font: 13px/1.231 arial,helvetica,clean,sans-serif;
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #C6C6C6;
+    padding: 1px 5px;
+    display: block;
+    margin: 1px;
+    height: 30px;
+}
+
+.tag-widget:after {
+    content: " ";
+    display:block;
+    clear: both;
+}
+
+.tag-widget .tag-item,
+.tag-widget .tag-item-input {
+    display: inline-block;
+    position: relative;
+    margin: 0 1px 0 0;
+    padding: 0;
+}
+
+.tag-widget .tag-item-input input {
+    margin: 2px 0px 2px 0px;
+    height: 20px;
+}
+
+.tag-widget .tag-item {
+    margin: 2px 0px 2px 0px;
+    padding: 0.2em 18px 0.2em 0.5em;
+}
+
+.tag-widget .tag-item.tag-choice {
+    background-color: #BBCEF1;
+    border-color: #6D95E0;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border: 1px solid #CAD8F3;
+    background: none;
+    background-color: #DEE7F8;
+    color: #555;
+    margin-right: 2px;
+}
+
+.tag-widget .tag-item.tag-choice:hover {
+    background-color: #BBCEF1;
+    border-color: #6D95E0;
+}
+
+.tag-widget .tag-label {
+
+}
+
+.tag-widget .tag-icon {
+    font-weight: bold;
+}
+
+.tag-widget .tag-input {
+    border: 0;
+    outline: none;
+}
+
+.tag-widget .tag-close {
+    cursor: pointer;
+    position: absolute;
+    right: 0.4em;
+    margin-top: -9px;
+    top: 50%;
+}
