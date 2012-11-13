@@ -1,4 +1,4 @@
-.tag-widget {
+.x-taginput-tag-widget {
 
     font: 13px/1.231 arial,helvetica,clean,sans-serif;
     list-style-type: none;
@@ -12,31 +12,31 @@
     height: 30px;
 }
 
-.tag-widget:after {
+.x-taginput-tag-widget:after {
     content: " ";
     display:block;
     clear: both;
 }
 
-.tag-widget .tag-item,
-.tag-widget .tag-item-input {
+.x-taginput-tag-widget .x-taginput-tag-item,
+.x-taginput-tag-widget .x-taginput-tag-item-input {
     display: inline-block;
     position: relative;
     margin: 0 1px 0 0;
     padding: 0;
 }
 
-.tag-widget .tag-item-input input {
+.x-taginput-tag-widget .x-taginput-tag-item-input input {
     margin: 2px 0px 2px 0px;
     height: 20px;
 }
 
-.tag-widget .tag-item {
+.x-taginput-tag-widget .x-taginput-tag-item {
     margin: 2px 0px 2px 0px;
     padding: 0.2em 18px 0.2em 0.5em;
 }
 
-.tag-widget .tag-item.tag-choice {
+.x-taginput-tag-widget .x-taginput-tag-item.x-taginput-tag-choice {
     background-color: #BBCEF1;
     border-color: #6D95E0;
     -moz-border-radius: 6px;
@@ -49,25 +49,25 @@
     margin-right: 2px;
 }
 
-.tag-widget .tag-item.tag-choice:hover {
+.x-taginput-tag-widget .x-taginput-tag-item.x-taginput-tag-choice:hover {
     background-color: #BBCEF1;
     border-color: #6D95E0;
 }
 
-.tag-widget .tag-label {
+.x-taginput-tag-widget .x-taginput-tag-label {
 
 }
 
-.tag-widget .tag-icon {
+.x-taginput-tag-widget .x-taginput-tag-icon {
     font-weight: bold;
 }
 
-.tag-widget .tag-input {
+.x-taginput-tag-widget input {
     border: 0;
     outline: none;
 }
 
-.tag-widget .tag-close {
+.x-taginput-tag-widget .x-taginput-tag-close {
     cursor: pointer;
     position: absolute;
     right: 0.4em;

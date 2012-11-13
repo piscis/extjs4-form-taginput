@@ -1,3 +1,23 @@
+/**
+ * TagInput for ExtJS 4.1, a textfield improved for simple and configurable tag editing.
+ *
+ * The TagInput component is basicaly a textfield with the ability to seperate words into
+ * a list of tags which can be saved.
+ *
+ * Options and usage mostly remain consistent with the standard
+ * [ComboBox](http://docs.sencha.com/ext-js/4-1/#!/api/Ext.form.field.Text) control.
+ * Some default configuration options have changed, but most should still work properly
+ * if overridden unless otherwise noted.
+ *
+ * Please note, this component does not support versions of ExtJS earlier than 4.1.
+ *
+ * Inspired by the [jQuery Tag-it Plugin](http://aehlke.github.com/tag-it/).
+ *
+ * @author Alexander Pirsig alex@pirsig.net
+ * @version 0.1.1
+ * @requires ../css/TagInput.css
+ * @xtype textinput
+ */
 Ext.define('Ext.ux.iworx.form.TagInput', {
 
     requires: [
@@ -19,9 +39,9 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
     width: "100%",
 
     fieldSubTpl: [
-        '<ul class="tag-widget"> ',
-        '   <li class="tag-item-input">',
-        '       <input type="text" class="tag-input" id="{id}" value="" />',
+        '<ul class="x-taginput-tag-widget {fieldCls}"> ',
+        '   <li class="x-taginput-tag-item-input">',
+        '       <input type="text" id="{id}" value="" />',
         '   </li>',
         '</ul>',
         {
@@ -30,10 +50,10 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
     ],
 
     tagNodeTpl: [
-        '<li style="" class="tag-item tag-choice">',
-        '    <span class="tag-label">{tagvalue}</span>',
-        '    <a class="tag-close">',
-        '         <span class="tag-icon">x</span>',
+        '<li style="" class="x-taginput-tag-item x-taginput-tag-choice">',
+        '    <span class="x-taginput-tag-label">{tagvalue}</span>',
+        '    <a class="x-taginput-tag-close">',
+        '         <span class="x-taginput-tag-icon">x</span>',
         '    </a>',
         '</li>'
     ],
@@ -70,7 +90,7 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
 
     getTagFieldEl: function(){
 
-        return Ext.select('#'+this.getId()+' ul.tag-widget').item(0);
+        return Ext.select('#'+this.getId()+' ul.x-taginput-tag-widget').item(0);
     },
     
     getRawValue: function(){
@@ -132,11 +152,11 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
                 // Delete the last item
                 if(e.getKey()==8){
 
-                    var lastTagItem = Ext.select('#'+me.getId()+' .tag-item:last');
+                    var lastTagItem = Ext.select('#'+me.getId()+' .x-taginput-tag-item:last');
 
                     if(lastTagItem.elements.length>0) {
     
-                        var textNode = Ext.select('#'+me.getId()+' .tag-item:last .tag-label');
+                        var textNode = Ext.select('#'+me.getId()+' .x-taginput-tag-item:last .x-taginput-tag-label');
                         var tagVal = textNode.item(0).dom.innerHTML;
                         var tmpTagVal = Ext.String.htmlDecode(tagVal);
 
@@ -210,7 +230,7 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
                     callback: function(e,target,foo){
                     
                         var parent = Ext.get(e.target.id),
-                            tagValue = parent.down('span.tag-label').dom.innerHTML,
+                            tagValue = parent.down('span.x-taginput-tag-label').dom.innerHTML,
                             tmpTagVal = Ext.String.htmlDecode(tagValue);
                         
                         me._removeTagValue(tmpTagVal);
@@ -218,10 +238,10 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
                 }
             };
 
-            parent = Ext.get(target).up('li.tag-item').fadeOut(opts);
+            parent = Ext.get(target).up('li.x-taginput-tag-item').fadeOut(opts);
 
         },null,{
-            delegate: 'a.tag-close'
+            delegate: 'a.x-taginput-tag-close'
         });
     },
 
@@ -234,7 +254,7 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
             if(this._findSelectedElement(tagval).elements.length==0){
 
                 var id = this.getId(),
-                    target = Ext.select('#'+id+' .tag-item-input').first(),
+                    target = Ext.select('#'+id+' .x-taginput-tag-item-input').first(),
                     html = this.tagNodeTpl,
                     tpl = Ext.core.DomHelper.createTemplate(html),
                     tmpTagVal = Ext.String.htmlEncode(tagval);
@@ -253,7 +273,7 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
     _syncWithStore: function(){
         var me = this;
 
-        Ext.select('#'+me.getId()+' .tag-item').remove();
+        Ext.select('#'+me.getId()+' .x-taginput-tag-item').remove();
         me._populateList();
     },
 
@@ -304,6 +324,6 @@ Ext.define('Ext.ux.iworx.form.TagInput', {
         var tagval = Ext.util.Format.trim(tagval),
             id = this.getId();
 
-        return Ext.select('#'+id+' li.tag-item span.tag-label:nodeValue('+tagval+')');
+        return Ext.select('#'+id+' li.x-taginput-tag-item span.x-taginput-tag-label:nodeValue('+tagval+')');
     }
 });
